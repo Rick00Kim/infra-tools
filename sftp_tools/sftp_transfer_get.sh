@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Script name : Transfer tool(PUT)
-# Description : put file(s) to web server.
+# Script name : Transfer tool(GET)
+# Description : Get file(s) from web server.
 # Version : [1.0.0]
 # Writer : Rick_Kim dreamx119@gmail.com
 

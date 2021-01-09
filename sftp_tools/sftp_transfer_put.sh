@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Script name : Transfer tool(GET)
-# Description : Get file(s) from web server
+# Script name : Transfer tool(PUT)
+# Description : Put file(s) to web server
 # Version : [1.0.0]
 # Writer : Rick_Kim dreamx119@gmail.com
 
@@ -70,7 +70,7 @@ for var in $*
 do
 $SFTP_PATH $SFTP_USER@$SFTP_ADDRESS << CMD >> $LOG_FILE
 cd $PUT_DIRECTORY
-get $var
+put -r $var
 quit
 CMD
 done
