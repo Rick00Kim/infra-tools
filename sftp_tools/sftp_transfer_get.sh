@@ -3,8 +3,11 @@
 # Script name : Transfer tool(GET)
 # Description : Get file(s) from web server.
 # Version : [1.0.0]
-# Writer : Rick_Kim dreamx119@gmail.com
+# Author : Rick_Kim dreamx119@gmail.com
 
+# Change history
+#  v1.0.0   - New create
+#  v1.0.1   - Add 
 # Define local function
 function create_log_comment() {
     echo "`date +%Y%m%d.%T`: $1" >> $LOG_FILE
@@ -83,7 +86,6 @@ cd $GET_DIRECTORY
 get $element
 CMD
 done
-
 
 # Add comment for end app
 create_log_comment "End transfer"
