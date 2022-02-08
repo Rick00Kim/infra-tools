@@ -10,6 +10,7 @@ function connect() {
    echo "Connect using TNS-> "$1
    sqlplus $ORACLE_SHEMA@$1
 }
+
 # Start [Check arguments]
 while getopts "s:t:" option  
 do
