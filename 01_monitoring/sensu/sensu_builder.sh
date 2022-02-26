@@ -85,17 +85,15 @@ case $kinds in
       echo "User cancelled or wrong answer..."
       exit 1
     else
-      # TODO [Delete exit and comment]
-      exit 1
-      # docker run -v /var/lib/sensu:/var/lib/sensu -d \
-      #     --name sensu-backend \
-      #     -p $web_ui_port:3000 \
-      #     -p $api_port:8080 \
-      #     -p $agent_port:8081 \
-      #     -e SENSU_BACKEND_CLUSTER_ADMIN_USERNAME="$admin_user_name" \
-      #     -e SENSU_BACKEND_CLUSTER_ADMIN_PASSWORD="$admin_password" \
-      #     sensu/sensu:latest \
-      #     sensu-backend start --state-dir /var/lib/sensu/sensu-backend --log-level debug
+      docker run -v /var/lib/sensu:/var/lib/sensu -d \
+          --name sensu-backend \
+          -p $web_ui_port:3000 \
+          -p $api_port:8080 \
+          -p $agent_port:8081 \
+          -e SENSU_BACKEND_CLUSTER_ADMIN_USERNAME="$admin_user_name" \
+          -e SENSU_BACKEND_CLUSTER_ADMIN_PASSWORD="$admin_password" \
+          sensu/sensu:latest \
+          sensu-backend start --state-dir /var/lib/sensu/sensu-backend --log-level debug
       echo "Completed building Sensu go!"
       echo "ENJOY Sensu monitoring~"
     fi
@@ -126,14 +124,12 @@ case $kinds in
       echo "User cancelled or wrong answer..."
       exit 1
     else
-      # TODO [Delete exit and comment]
-      exit 1
-      # docker run -v /var/lib/sensu:/var/lib/sensu -d \
-      #   --name sensu-agent sensu/sensu sensu-agent start \
-      #   --name $(uname -n) --namespace $name_space \
-      #   --backend-url ws://$web_socket_url \
-      #   --log-level debug --api-host 0.0.0.0 \
-      #   --cache-dir /var/lib/sensu
+      docker run -v /var/lib/sensu:/var/lib/sensu -d \
+        --name sensu-agent sensu/sensu sensu-agent start \
+        --name $(uname -n) --namespace $name_space \
+        --backend-url ws://$web_socket_url \
+        --log-level debug --api-host 0.0.0.0 \
+        --cache-dir /var/lib/sensu
       echo "Completed building Sensu agent!"
       echo "ENJOY Sensu monitoring~"
     fi
