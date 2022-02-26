@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Import Common script
 . common.sh
 
 #######################################################
@@ -35,10 +36,12 @@ read -p '[Master or Slave]: ' kinds
 # Check argument [Target variable: Sensu Kinds]
 if [ -z $kinds ];then
   echo "It will make sensu agent..."
+  # Confirm to user
   read -p 'Are you sure?[y/n] - ' default_kind_confirm
   if [ -z $default_kind_confirm ] || [ $default_kind_confirm != "y" ]; then
     exit 1
   else
+    # Set default kinds
     kinds="Slave"
   fi
 else
@@ -51,13 +54,16 @@ fi
 # Execute Main process
 case $kinds in
   Master)
+    # Building Sensu go Process
     echo "It starts building sensu go (Master server)"
+    # Input
     web_ui_port=$(get_port "SENSU WEB UI" 3000)
     api_port=$(get_port "SENSU API" 8080)
     agent_port=$(get_port "SENSU AGENT" 8081)
     admin_user_name=$(get_require_data "Admin Username" "false")
     admin_password=$(get_require_data "Admin Password" "true")
 
+    # Check input information
     check_input \
       "$web_ui_port" \
       "$api_port" \
@@ -65,11 +71,13 @@ case $kinds in
       "$admin_user_name" \
       "$admin_password"
 
+    # When exists wrong input, exit program
     if [ $? == 1 ]; then
       echo "There is wrong input..."
       exit 1
     fi
 
+    # Show all input
     echo
     echo "Let we build sensu go with your input below."
     echo "------------ Input Check -----------------"
@@ -81,6 +89,8 @@ case $kinds in
     echo "------------------------------------------"
     read -p 'Are you sure?[y/n] - ' confirm_build
     echo
+
+    # Confirm to user
     if [ -z $confirm_build ] || [ $confirm_build != "y" ]; then
       echo "User cancelled or wrong answer..."
       exit 1
@@ -99,19 +109,24 @@ case $kinds in
     fi
     ;;
   Slave)
+    # Building Sensu agent Process
     echo "It starts building sensu agent (Slave server)"
+    # Input
     web_socket_url=$(get_require_data "WEB Socket URL" "false")
     name_space=$(get_require_data "SENSU namespace" "false")
 
+    # Check input information
     check_input \
       "$web_socket_url" \
       "$name_space"
 
+    # When exists wrong input, exit program
     if [ $? == 1 ]; then
       echo "There is wrong input..."
       exit 1
     fi
 
+    # Show all input
     echo
     echo "Let we build sensu agent with your input below."
     echo "------------ Input Check -----------------"
@@ -120,6 +135,8 @@ case $kinds in
     echo "------------------------------------------"
     read -p 'Are you sure?[y/n] - ' confirm_build
     echo
+
+    # Confirm to user
     if [ -z $confirm_build ] || [ $confirm_build != "y" ]; then
       echo "User cancelled or wrong answer..."
       exit 1
