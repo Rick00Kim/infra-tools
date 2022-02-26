@@ -3,21 +3,6 @@
 # Import Common script
 . common.sh
 
-#######################################################
-# Help                                                #
-#######################################################
-Help()
-{
-   # Display Help
-   echo "You don't have to set any options."
-   echo
-   echo "Just execute script, It will be make your sensu go or sensu agent"
-   echo "Thank you."
-   echo
-   echo "Made by Rick00Kim <dreamx119@gmail.com>"
-   echo
-}
-
 # Start [Check arguments]
 while getopts ":h" option  
 do
