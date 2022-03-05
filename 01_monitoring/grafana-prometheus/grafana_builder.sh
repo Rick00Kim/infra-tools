@@ -22,6 +22,7 @@ read -p 'Are you sure?[y/n] - ' confirm_flg
 if [ -z $confirm_flg ] || [ $confirm_flg != "y" ]; then
   echo "User cancelled or wrong answer..."
   exit 1
+fi
 
 # Execute Main process
 # Input
@@ -64,7 +65,10 @@ else
     -v `pwd`/prometheus.yml:/etc/prometheus/prometheus.yml \
     --name ${promethus_container_name} \
     prom/prometheus
+  echo "Created promethus container ($promethus_container_name) -> port is $promethus_port"
 
   docker run -d -p ${grafana_port}:3000 \
     --name=${grafana_container_name} \
     grafana/grafana
+  echo "Created grafana container ($grafana_container_name) -> port is $grafana_port"
+fi
