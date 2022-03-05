@@ -13,9 +13,18 @@ do
   esac
 done
 
+# Check before
+PROMETHUS_YAML="promethus.yml"
+if [ ! -f "$PROMETHUS_YAML" ]; then
+    echo "$PROMETHUS_YAML not exists."
+    echo "Please create a $PROMETHUS_YAML using the template file."
+    echo "  (Template file name: template_promethus.yml)"
+    exit 1
+fi
+
 # Prompt user to insert inputs
 echo 'Do you wanna install Grafana and Promethus on this Machine?'
-echo '(If you don''t any input, it will be exit)'
+echo '   (If you don''t any input, it will be exit)'
 read -p 'Are you sure?[y/n] - ' confirm_flg
 
 # Confirm to user
@@ -62,7 +71,7 @@ if [ -z $confirm_build ] || [ $confirm_build != "y" ]; then
   exit 1
 else
   docker run -d -p ${promethus_port}:9090 \
-    -v `pwd`/prometheus.yml:/etc/prometheus/prometheus.yml \
+    -v `pwd`/$PROMETHUS_YAML:/etc/prometheus/$PROMETHUS_YAML \
     --name ${promethus_container_name} \
     prom/prometheus
   echo "Created promethus container ($promethus_container_name) -> port is $promethus_port"
