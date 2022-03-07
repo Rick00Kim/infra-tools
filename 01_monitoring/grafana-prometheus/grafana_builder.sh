@@ -81,3 +81,6 @@ else
     grafana/grafana
   echo "Created grafana container ($grafana_container_name) -> port is $grafana_port"
 fi
+
+echo "Completed Building monitoring tool."
+echo "Please run node export in Target VM what you want monitor."
