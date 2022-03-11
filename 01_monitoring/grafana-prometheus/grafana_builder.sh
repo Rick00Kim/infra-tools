@@ -70,16 +70,27 @@ if [ -z $confirm_build ] || [ $confirm_build != "y" ]; then
   echo "User cancelled or wrong answer..."
   exit 1
 else
+  # Run Promethus container
   docker run -d -p ${promethus_port}:9090 \
     -v `pwd`/$PROMETHUS_YAML:/etc/prometheus/$PROMETHUS_YAML \
     --name ${promethus_container_name} \
     prom/prometheus
   echo "Created promethus container ($promethus_container_name) -> port is $promethus_port"
 
+  # Run Grafana container
   docker run -d -p ${grafana_port}:3000 \
-    --name=${grafana_container_name} \
+    --name ${grafana_container_name} \
     grafana/grafana
   echo "Created grafana container ($grafana_container_name) -> port is $grafana_port"
+
+  # Create network and connect created containers
+  network_name=$(uname -n)-monitoring
+  docker network create -d bridge ${network_name}
+  docker network connect ${network_name} ${promethus_container_name}
+  docker network connect ${network_name} ${grafana_container_name}
+  echo "Created docker network ${network_name} and connected below."
+  echo "Conatainer -> ${promethus_container_name}"
+  echo "Conatainer -> ${grafana_container_name}"
 fi
 
 echo "Completed Building monitoring tool."
