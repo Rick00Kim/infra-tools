@@ -8,7 +8,7 @@ variable target_ssh_file_path { }
 
 # CREATE RESOURCE
 # VM Instance
-resource "oci_core_instance" "ubuntu_instance" {
+resource "oci_core_instance" "target_instance" {
     # Required
     availability_domain = var.target_availability_domain
     compartment_id = var.target_compartment_id
