@@ -1,6 +1,8 @@
 # DEFINE VARIABLES
 variable target_compartment_id { }
 variable target_region { }
+variable target_vcn_name { }
+variable target_vcn_dns_label { }
 
 # CREATE RESOURCE
 # VCN (Virtual Cloud Network)
@@ -16,8 +18,8 @@ module "vcn" {
   nat_gateway_route_rules = null
 
   # Optional Inputs
-  vcn_name = "vcn_kururu_monitoring"
-  vcn_dns_label = "vcnmonitor"
+  vcn_name = var.target_vcn_name
+  vcn_dns_label = var.target_vcn_dns_label
   vcn_cidrs = ["10.0.0.0/16"]
   
   create_internet_gateway = true
