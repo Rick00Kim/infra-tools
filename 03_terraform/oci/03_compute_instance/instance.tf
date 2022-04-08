@@ -5,6 +5,7 @@ variable target_availability_domain { default = "KWby:AP-TOKYO-1-AD-1" }
 variable target_image_id { default = "ocid1.image.oc1.ap-tokyo-1.aaaaaaaaiqnzylthf6siyhwrnwu7fzci2clbp4rpdtuok6byikb727nklc5q" }
 variable target_subnet_id { }
 variable target_ssh_file_path { }
+variable target_instance_name { }
 
 # CREATE RESOURCE
 # VM Instance
@@ -19,7 +20,7 @@ resource "oci_core_instance" "target_instance" {
     }
 
     # Optional
-    display_name = "monitoring-instance"
+    display_name = var.target_instance_name
     shape_config {
         memory_in_gbs             = "8"
         ocpus                     = "1"
