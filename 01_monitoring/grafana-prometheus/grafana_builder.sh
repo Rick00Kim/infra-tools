@@ -14,7 +14,7 @@ do
 done
 
 # Check before
-PROMETHUS_YAML="promethus.yml"
+PROMETHUS_YAML="prometheus.yml"
 if [ ! -f "$PROMETHUS_YAML" ]; then
     echo "$PROMETHUS_YAML not exists."
     echo "Please create a $PROMETHUS_YAML using the template file."

@@ -6,6 +6,8 @@ variable target_image_id { default = "ocid1.image.oc1.ap-tokyo-1.aaaaaaaaiqnzylt
 variable target_subnet_id { }
 variable target_ssh_file_path { }
 variable target_instance_name { }
+variable target_ocpus_cnt { default = "1" }
+variable target_memory_cnt { default = "6" }
 
 # CREATE RESOURCE
 # VM Instance
@@ -22,8 +24,8 @@ resource "oci_core_instance" "target_instance" {
     # Optional
     display_name = var.target_instance_name
     shape_config {
-        memory_in_gbs             = "8"
-        ocpus                     = "1"
+        memory_in_gbs             = var.target_memory_cnt
+        ocpus                     = var.target_ocpus_cnt
     }
     create_vnic_details {
         assign_public_ip = true
