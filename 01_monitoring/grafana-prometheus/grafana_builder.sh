@@ -95,3 +95,4 @@ fi
 
 echo "Completed Building monitoring tool."
 echo "Please run node export in Target VM what you want monitor."
+echo "example) docker run -d -p {specific port}:9100 prom/node-exporter"
