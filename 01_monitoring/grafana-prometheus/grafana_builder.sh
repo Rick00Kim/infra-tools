@@ -6,7 +6,7 @@
 # Start [Check arguments]
 while getopts ":h" option  
 do
-  case $option in
+  case $option inㄹ
     h)
       Help
       exit;;
