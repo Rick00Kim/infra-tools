@@ -74,12 +74,14 @@ else
   docker run -d -p ${promethus_port}:9090 \
     -v `pwd`/$PROMETHUS_YAML:/etc/prometheus/$PROMETHUS_YAML \
     --name ${promethus_container_name} \
+    --restart unless-stopped \
     prom/prometheus
   echo "Created promethus container ($promethus_container_name) -> port is $promethus_port"
 
   # Run Grafana container
   docker run -d -p ${grafana_port}:3000 \
     --name ${grafana_container_name} \
+    --restart unless-stopped \
     grafana/grafana
   echo "Created grafana container ($grafana_container_name) -> port is $grafana_port"
 
