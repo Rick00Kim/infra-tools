@@ -7,7 +7,7 @@ terraform {
   # For using, Update manually "<RESOURCE_NAME>" because Backend config cannot set dynamically.
   backend "s3" {
     bucket = "${BUCKET_NAME}"
-    key    = "s3/private/${RESOURCE_NAME}.tfstate"
+    key    = "ecr/private/${RESOURCE_NAME}.tfstate"
     region = "us-east-2"
   }
 }
