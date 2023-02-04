@@ -1,4 +1,4 @@
-variable "iam-bucket-name" {
+variable "role-name" {
   type    = string
 }
 
