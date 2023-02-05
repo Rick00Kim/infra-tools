@@ -8,3 +8,9 @@ resource "aws_iam_role_policy" "new_iac_role_policy" {
   role   = aws_iam_role.new_iac_role.id
   policy = file("${path.module}/rolePolicy.json")
 }
+
+resource "aws_iam_role_policy" "new_iac_role_policy2" {
+  name   = "${var.role-name}_policy2"
+  role   = aws_iam_role.new_iac_role.id
+  policy = file("${path.module}/rolePolicy.json")
+}
