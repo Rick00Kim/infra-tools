@@ -6,8 +6,8 @@ terraform {
   }
   # For using, Update manually "<RESOURCE_NAME>" because Backend config cannot set dynamically.
   backend "s3" {
-    bucket = "${BUCKET_NAME}"
-    key    = "pipeline/${RESOURCE_NAME}.tfstate"
+    bucket = "kururu-terraform-logs"
+    key    = "pipeline/test2.tfstate"
     region = "us-east-2"
   }
 }
